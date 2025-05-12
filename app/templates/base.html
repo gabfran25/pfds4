@@ -13,7 +13,7 @@
             background-color: #f8f9fa;
         }
         .navbar-unison {
-            background-color: #9d2235; /* rojo institucional */
+            background-color: #0f078a; /* rojo institucional */
         }
         .navbar-unison .nav-link,
         .navbar-unison .navbar-brand {
@@ -40,13 +40,13 @@
     <div class="container">
         <a class="navbar-brand" href="{{ url_for('inicio') }}">Revistas UNISON</a>
         <div class="ms-auto">
-            <img src="{{ url_for('static', filename='img/logo_unison.png') }}" alt="UNISON" class="logo-unison">
+            <img src="{{ url_for('static', filename='images/logounison.png') }}" alt="UNISON" class="logo-unison">
         </div>
     </div>
     
 </nav>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" style="background-color: #92a106;">
     <div class="container">
         <div class="collapse navbar-collapse show">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -68,10 +68,12 @@
 <div class="text-center">
         <h1 class="mb-4">Catálogo de Revistas UNISON</h1>
         <p class="lead">Consulta, explora y conoce más sobre las revistas científicas clasificadas por áreas y catálogos.</p>
-        <img src="https://www.unison.mx/wp-content/uploads/2022/11/logo_unison_2022.png" alt="UNISON" style="max-height: 150px;">
+        <p class="lead">En este sitio podrás buscar revistas científicas, dependiendo de su área o catálogo.</p>        
+        <p class="lead">También podrás explorar los diferntes tipos de revistas que hay para ti.</p>
+        <img src="{{ url_for('static', filename='images/logounison.png') }}" alt="UNISON" style="max-height: 150px;">
 </div>
 
-<footer>
+<footer style="background-color: #0f078a;">
     Universidad de Sonora © {{ now().year }} - Proyecto académico
 </footer>
 

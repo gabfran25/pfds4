@@ -24,7 +24,7 @@
         <tbody>
             {% for revista in revistas %}
             <tr>
-                <td><a href="{{ url_for('ver_revista', titulo=revista.titulo) }}">{{ revista.titulo }}</a></td>
+                <td><a href="{{ url_for('ver_revista', titulo=revista.titulo|urlencode) }}">{{ revista.titulo }}</a></td>
                 <td>{{ revista.h_index }}</td>
                 <td>
                     {% for area in revista.areas %}

@@ -4,6 +4,10 @@ import os
 
 app = Flask(__name__)
 
+from urllib.parse import quote
+app.jinja_env.filters['urlencode'] = lambda u: quote(u)
+
+
 # Ruta al archivo JSON generado por parteDos.py
 JSON_PATH = os.path.join('datos', 'json', 'revistas_scimagojr.json')
 
@@ -108,10 +112,9 @@ def buscar():
 
 @app.route('/revista/<titulo>')
 def ver_revista(titulo):
-    clave = normalizar(titulo)
-    datos = revistas_data.get(clave)
-    if datos:
-        return render_template('revista.html', titulo=titulo, datos=datos)
+    for nombre, datos in revistas_data.items():
+        if normalizar(nombre) == normalizar(titulo):
+            return render_template('revista.html', titulo=nombre, datos=datos)
     return f"No se encontró información para: {titulo}", 404
 
 @app.route('/creditos')

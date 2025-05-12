@@ -1,45 +1,53 @@
 {% extends "base.html" %}
-{% block title %}Búsqueda{% endblock %}
+{% block title %}Resultados de Búsqueda{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2 class="text-primary">Buscar revistas</h2>
-    <form method="GET" action="{{ url_for('buscar') }}" class="mb-4">
-        <input type="text" name="q" class="form-control" placeholder="Escribe parte del título de la revista..." value="{{ query }}">
+<div class="container mt-5">
+    <h2 class="mb-4 text-primary">Buscar revistas académicas</h2>
+
+    <form method="GET" action="{{ url_for('buscar') }}" class="input-group mb-4">
+        <input type="text" name="q" class="form-control" placeholder="Introduce palabras clave del título..." value="{{ query }}">
+        <button class="btn btn-outline-primary" type="submit">Buscar</button>
     </form>
 
     {% if resultados %}
-    <h5>Resultados de búsqueda: "{{ query }}"</h5>
-    <table class="table table-bordered table-hover mt-3">
-        <thead class="table-light">
-            <tr>
-                <th>Título</th>
-                <th>H-Index</th>
-                <th>Áreas</th>
-                <th>Catálogos</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for revista in resultados %}
-            <tr>
-                <td><a href="{{ url_for('ver_revista', titulo=revista.titulo) }}">{{ revista.titulo }}</a></td>
-                <td>{{ revista.h_index }}</td>
-                <td>
-                    {% for area in revista.areas %}
-                        <a href="{{ url_for('ver_area', nombre=area) }}" class="badge bg-warning text-dark">{{ area }}</a>
+        <h5>Resultados para: "<span class="text-muted">{{ query }}</span>"</h5>
+        <div class="table-responsive mt-3">
+            <table class="table table-striped table-bordered align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Título</th>
+                        <th>H-Index</th>
+                        <th>Áreas</th>
+                        <th>Catálogos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for revista in resultados %}
+                    <tr>
+                        <td>
+                            <a href="{{ url_for('ver_revista', titulo=revista.titulo) }}" class="text-decoration-none fw-bold">
+                                {{ revista.titulo }}
+                            </a>
+                        </td>
+                        <td>{{ revista.h_index }}</td>
+                        <td>
+                            {% for area in revista.areas %}
+                                <a href="{{ url_for('ver_area', nombre=area) }}" class="badge bg-warning text-dark me-1">{{ area }}</a>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for cat in revista.catalogos %}
+                                <a href="{{ url_for('ver_catalogo', nombre=cat) }}" class="badge bg-secondary me-1">{{ cat }}</a>
+                            {% endfor %}
+                        </td>
+                    </tr>
                     {% endfor %}
-                </td>
-                <td>
-                    {% for cat in revista.catalogos %}
-                        <a href="{{ url_for('ver_catalogo', nombre=cat) }}" class="badge bg-secondary">{{ cat }}</a>
-                    {% endfor %}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
     {% elif query %}
-        <p>No se encontraron resultados para "{{ query }}".</p>
+        <div class="alert alert-warning">No se encontraron resultados para "{{ query }}".</div>
     {% endif %}
 </div>
 {% endblock %}
