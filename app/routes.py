@@ -120,8 +120,6 @@ def ver_revista(titulo):
 @app.route('/creditos')
 def creditos():
     integrantes = [
-        {"nombre": "Nombre 1", "foto": "foto1.jpg"},
-        {"nombre": "Nombre 2", "foto": "foto2.jpg"},
-        # Agrega o elimina según tu equipo
+        {"nombre": "José Alberto Germán López", "foto": "/static/images/yop.jpg"},
     ]
     return render_template('creditos.html', integrantes=integrantes)
