@@ -43,6 +43,7 @@
             <img src="{{ url_for('static', filename='img/logo_unison.png') }}" alt="UNISON" class="logo-unison">
         </div>
     </div>
+    
 </nav>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
@@ -63,6 +64,12 @@
 <main class="container py-4">
     {% block content %}{% endblock %}
 </main>
+
+<div class="text-center">
+        <h1 class="mb-4">Catálogo de Revistas UNISON</h1>
+        <p class="lead">Consulta, explora y conoce más sobre las revistas científicas clasificadas por áreas y catálogos.</p>
+        <img src="https://www.unison.mx/wp-content/uploads/2022/11/logo_unison_2022.png" alt="UNISON" style="max-height: 150px;">
+</div>
 
 <footer>
     Universidad de Sonora © {{ now().year }} - Proyecto académico
