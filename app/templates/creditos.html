@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Créditos{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-primary">Créditos del Proyecto</h2>
+    <table class="table table-striped mt-3">
+        <thead class="table-light">
+            <tr>
+                <th>Nombre</th>
+                <th>Foto</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for integrante in integrantes %}
+            <tr>
+                <td>{{ integrante.nombre }}</td>
+                <td>
+                    {% if integrante.foto %}
+                        <img src="{{ url_for('static', filename='img/' ~ integrante.foto) }}" alt="Foto de {{ integrante.nombre }}" width="80">
+                    {% else %}
+                        Sin foto
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

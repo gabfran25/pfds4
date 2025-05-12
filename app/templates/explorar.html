@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Explorar{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-primary">Explorar revistas por letra</h2>
+    <div class="mb-3">
+        {% for letra in letras %}
+        <a href="{{ url_for('explorar_letra', letra=letra) }}" class="btn btn-outline-secondary btn-sm m-1">{{ letra }}</a>
+        {% endfor %}
+    </div>
+
+    {% if revistas %}
+    <h4>Revistas que comienzan con "{{ letra_actual }}"</h4>
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>Título</th>
+                <th>H-Index</th>
+                <th>Áreas</th>
+                <th>Catálogos</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for revista in revistas %}
+            <tr>
+                <td><a href="{{ url_for('ver_revista', titulo=revista.titulo) }}">{{ revista.titulo }}</a></td>
+                <td>{{ revista.h_index }}</td>
+                <td>
+                    {% for area in revista.areas %}
+                        <a href="{{ url_for('ver_area', nombre=area) }}" class="badge bg-warning text-dark">{{ area }}</a>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for cat in revista.catalogos %}
+                        <a href="{{ url_for('ver_catalogo', nombre=cat) }}" class="badge bg-secondary">{{ cat }}</a>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endblock %}

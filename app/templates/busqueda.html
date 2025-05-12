@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Búsqueda{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-primary">Buscar revistas</h2>
+    <form method="GET" action="{{ url_for('buscar') }}" class="mb-4">
+        <input type="text" name="q" class="form-control" placeholder="Escribe parte del título de la revista..." value="{{ query }}">
+    </form>
+
+    {% if resultados %}
+    <h5>Resultados de búsqueda: "{{ query }}"</h5>
+    <table class="table table-bordered table-hover mt-3">
+        <thead class="table-light">
+            <tr>
+                <th>Título</th>
+                <th>H-Index</th>
+                <th>Áreas</th>
+                <th>Catálogos</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for revista in resultados %}
+            <tr>
+                <td><a href="{{ url_for('ver_revista', titulo=revista.titulo) }}">{{ revista.titulo }}</a></td>
+                <td>{{ revista.h_index }}</td>
+                <td>
+                    {% for area in revista.areas %}
+                        <a href="{{ url_for('ver_area', nombre=area) }}" class="badge bg-warning text-dark">{{ area }}</a>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for cat in revista.catalogos %}
+                        <a href="{{ url_for('ver_catalogo', nombre=cat) }}" class="badge bg-secondary">{{ cat }}</a>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% elif query %}
+        <p>No se encontraron resultados para "{{ query }}".</p>
+    {% endif %}
+</div>
+{% endblock %}

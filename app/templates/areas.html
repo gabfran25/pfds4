@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Áreas{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-primary">Áreas disponibles</h2>
+
+    <!-- Lista de áreas -->
+    <ul class="list-group mt-3 mb-4">
+        {% for area in areas %}
+        <li class="list-group-item">
+            <a href="{{ url_for('ver_area', nombre=area) }}">{{ area }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% if area_actual %}
+    <h3 class="text-secondary">Revistas en el área: {{ area_actual }}</h3>
+
+    <!-- Barra de búsqueda -->
+    <input type="text" id="busqueda" class="form-control mb-3" placeholder="Buscar revista por título...">
+
+    <!-- Tabla de resultados -->
+    <table class="table table-bordered table-hover" id="tablaRevistas">
+        <thead class="table-light">
+            <tr>
+                <th>Título</th>
+                <th>H-Index</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for revista in revistas %}
+            <tr>
+                <td><a href="{{ url_for('ver_revista', titulo=revista.titulo) }}">{{ revista.titulo }}</a></td>
+                <td>{{ revista.h_index }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+
+<script>
+// Búsqueda dinámica en la tabla
+document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('busqueda');
+    const filas = document.querySelectorAll('#tablaRevistas tbody tr');
+
+    input.addEventListener('keyup', () => {
+        const filtro = input.value.toLowerCase();
+        filas.forEach(fila => {
+            const texto = fila.textContent.toLowerCase();
+            fila.style.display = texto.includes(filtro) ? '' : 'none';
+        });
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Revistas UNISON{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar-unison {
+            background-color: #9d2235; /* rojo institucional */
+        }
+        .navbar-unison .nav-link,
+        .navbar-unison .navbar-brand {
+            color: #fff !important;
+        }
+        .navbar-unison .nav-link:hover {
+            color: #f2b705 !important; /* dorado */
+        }
+        footer {
+            background-color: #9d2235;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        .logo-unison {
+            max-height: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-unison">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for('inicio') }}">Revistas UNISON</a>
+        <div class="ms-auto">
+            <img src="{{ url_for('static', filename='img/logo_unison.png') }}" alt="UNISON" class="logo-unison">
+        </div>
+    </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    <div class="container">
+        <div class="collapse navbar-collapse show">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('inicio') }}">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('areas') }}">Área</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('catalogos') }}">Catálogos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('explorar') }}">Explorar</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('buscar') }}">Búsqueda</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('creditos') }}">Créditos</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="container py-4">
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    Universidad de Sonora © {{ now().year }} - Proyecto académico
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

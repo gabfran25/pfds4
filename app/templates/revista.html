@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block titulo %}{{ titulo }}{% endblock %}
+{% block contenido %}
+    <h2>{{ titulo }}</h2>
+    {% if datos %}
+        <ul class="list-group">
+            <li class="list-group-item"><strong>H-Index:</strong> {{ datos.h_index }}</li>
+            <li class="list-group-item"><strong>Publisher:</strong> {{ datos.publisher }}</li>
+            <li class="list-group-item"><strong>ISSN:</strong> {{ datos.issn }}</li>
+            <li class="list-group-item"><strong>Área:</strong> {{ datos.subject_area_category }}</li>
+            <li class="list-group-item"><strong>Tipo de Publicación:</strong> {{ datos.publication_type }}</li>
+            <li class="list-group-item"><strong>Sitio Web:</strong> <a href="{{ datos.site }}" target="_blank">{{ datos.site }}</a></li>
+        </ul>
+        {% if datos.widget %}
+            <div class="mt-3 text-center">
+                <img src="{{ datos.widget }}" alt="Scimago Widget">
+            </div>
+        {% endif %}
+    {% else %}
+        <p>No se encontró información para esta revista.</p>
+    {% endif %}
+{% endblock %}

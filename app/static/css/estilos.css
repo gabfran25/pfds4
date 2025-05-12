@@ -1,0 +1,12 @@
+/* static/css/estilos.css */
+.bg-unison {
+    background-color: #981e32 !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #ffffff;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #f9b233;
+}
